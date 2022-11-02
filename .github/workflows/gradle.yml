@@ -45,7 +45,6 @@ jobs:
       #빌드(테스트 스킵)
       - name: Build with Gradle
         run: |
-          cd ./test
           ./gradlew build -x test
       ## create application-dev.properties
       - name: make application.properties
@@ -57,7 +56,7 @@ jobs:
         shell: bash
       #CD
       #배포용 properties 설정
-      - name: Make application.prod.properties
+      - name: make application.prod.properties
         if: contains(github.ref, 'main')
         run: |
           touch ./application.prod.properties
