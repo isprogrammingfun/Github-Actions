@@ -66,7 +66,9 @@ jobs:
       #빌드(테스트 스킵)
       - name: Build With Gradle
           if: contains(github.ref, 'master')
-          run: ../gradlew build -x test
+          run: |
+            cd ../..
+            ./gradlew build -x test
       #도커 빌드 & 푸시
       - name: docker build and push
         if: contains(github.ref, 'main')
