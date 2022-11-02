@@ -60,7 +60,6 @@ jobs:
       - name: Make application.prod.properties
         if: contains(github.ref, 'main')
         run: |
-          cd .test/src/main/resources
           touch ./application.prod.properties
           echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
         shell: bash
