@@ -39,7 +39,9 @@ jobs:
       #CI
       #gradle 권한 추가
       - name: Grant Execute Permission For Gradlew
-        run: chmod +x gradlew
+        run: |
+        cd ./test
+        chmod +x gradlew
       #빌드(테스트 스킵)
       - name: Build with Gradle
         run: ./gradlew build -x test
