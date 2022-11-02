@@ -47,11 +47,11 @@ jobs:
         run: |
           cd ./test
           ./gradlew build -x test
-      ## create application-dev.properties
+      ## properties 설정
       - name: make application.properties
         if: contains(github.ref, 'main')
         run: |
-          cd ./test/src/main/resources
+          cd ./src/main/resources
           touch ./application.properties
           echo "${{ secrets.PROPERTIES_DEV }}" > ./application.properties
         shell: bash
@@ -60,7 +60,7 @@ jobs:
       - name: make application.prod.properties
         if: contains(github.ref, 'main')
         run: |
-          cd ./test/src/main/resources
+          cd ./src/main/resources
           touch ./application.prod.properties
           echo "${{ secrets.PROPERTIES_PROD }}" > ./application.prod.properties
         shell: bash
