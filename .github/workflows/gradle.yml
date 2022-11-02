@@ -64,7 +64,7 @@ jobs:
           echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
         shell: bash
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       #도커 빌드 & 푸시
       - name: docker build and push
         if: contains(github.ref, 'main')
