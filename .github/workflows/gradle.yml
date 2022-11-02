@@ -52,7 +52,7 @@ jobs:
         if: contains(github.ref, 'main')
         run: |
           cd ./test/src/main/resources
-          touch ./application-dev.properties
+          touch ./application.properties
           echo "${{ secrets.PROPERTIES_DEV }}" > ./application.properties
         shell: bash
       #CD
@@ -62,7 +62,7 @@ jobs:
         run: |
           cd ./test/src/main/resources
           touch ./application.prod.properties
-          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
+          echo "${{ secrets.PROPERTIES_PROD }}" > ./application.prod.properties
         shell: bash
       #빌드(테스트 스킵)
       - name: Build With Gradle
