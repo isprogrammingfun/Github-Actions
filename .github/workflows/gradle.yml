@@ -57,11 +57,11 @@ jobs:
         shell: bash
       #CD
       #배포용 properties 설정
-      - name: Make application-prod.properties
+      - name: Make application.prod.properties
         if: contains(github.ref, 'main')
         run: |
           cd .test/src/main/resources
-          touch ./application-prod.properties
+          touch ./application.prod.properties
           echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
         shell: bash
       #도커 빌드 & 푸시
