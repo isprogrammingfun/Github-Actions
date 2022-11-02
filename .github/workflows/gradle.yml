@@ -44,7 +44,9 @@ jobs:
           chmod +x gradlew
       #빌드(테스트 스킵)
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: |
+          cd ./test
+          ./gradlew build -x test
       ## create application-dev.properties
       - name: make application.properties
         if: contains(github.ref, 'develop')
