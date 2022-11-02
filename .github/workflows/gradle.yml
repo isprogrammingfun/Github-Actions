@@ -45,12 +45,13 @@ jobs:
       #빌드(테스트 스킵)
       - name: Build with Gradle
         run: |
+          cd ./test
           ./gradlew build -x test
       ## create application-dev.properties
       - name: make application.properties
         if: contains(github.ref, 'main')
         run: |
-          cd ./src/main/resources
+          cd ./test/src/main/resources
           touch ./application-dev.properties
           echo "${{ secrets.PROPERTIES_DEV }}" > ./application.properties
         shell: bash
@@ -59,6 +60,7 @@ jobs:
       - name: make application.prod.properties
         if: contains(github.ref, 'main')
         run: |
+          cd ./test/src/main/resources
           touch ./application.prod.properties
           echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
         shell: bash
@@ -66,7 +68,7 @@ jobs:
       - name: Build With Gradle
         if: contains(github.ref, 'main')
         run: |
-          cd ../..
+          cd ./test
           ./gradlew build -x test
       #도커 빌드 & 푸시
       - name: docker build and push
