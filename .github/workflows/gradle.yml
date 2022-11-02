@@ -48,22 +48,22 @@ jobs:
           cd ./test
           ./gradlew build -x test
       ## properties 설정
-      - name: make application.properties
+      - name: create application-dev.properties
+        if: contains(github.ref, 'develop')
+        run: |
+          cd ./test/src/main/resources
+          touch ./application-dev.properties
+          echo "${{ secrets.PROPERTIES_DEV }}" > ./application-dev.properties
+        shell: bash
+      ## 배포용 properties 설정
+      - name: create application-prod.properties
         if: contains(github.ref, 'main')
         run: |
           cd ./test/src/main/resources
-          touch ./application.properties
-          echo "${{ secrets.PROPERTIES_DEV }}" > ./application.properties
+          touch ./application-prod.properties
+          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
         shell: bash
-      #CD
-      #배포용 properties 설정
-      - name: make application.prod.properties
-        if: contains(github.ref, 'main')
-        run: |
-          cd ./test/src/main/resources
-          touch ./application.prod.properties
-          echo "${{ secrets.PROPERTIES_PROD }}" > ./application.prod.properties
-        shell: bash
+      ##CD
       #빌드(테스트 스킵)
       - name: Build With Gradle
         if: contains(github.ref, 'main')
