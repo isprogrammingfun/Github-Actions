@@ -87,7 +87,7 @@ jobs:
             sudo rm -rf /var/lib/docker
             sudo service docker start
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal:latest
-            docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal
             docker stop server
             docker compose-up -d
