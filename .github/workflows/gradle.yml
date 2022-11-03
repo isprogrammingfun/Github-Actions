@@ -83,9 +83,7 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           envs: GITHUB_SHA
           script: |
-            sudo chmod 777 /var/run/docker.sock
-            docker stop nanal
-            docker rm nanal
+            sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
-            docker run -d --name pickrap -p 8080:8080 wisjang1/nanal
-            docker rmi -f $(docker images -f "dangling=true" -q)
+            docker-compose up -d
+            docker image prune -f
