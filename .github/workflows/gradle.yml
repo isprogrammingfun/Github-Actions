@@ -85,7 +85,7 @@ jobs:
           script: |
             sudo service docker stop 
             sudo rm -rf /var/run/docker
-            sudo rm /var/run/docker.*"
+            sudo rm /var/run/docker.*
             sudo service docker start
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker stop nanal
