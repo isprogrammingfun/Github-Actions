@@ -83,8 +83,8 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            sudo systemctl start docker
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            sudo service docker start
             docker stop nanal
             docker rm nanal
             sudo docker pull ${{ secrets.DOCKER_HUB_ID }}/nanal
