@@ -80,12 +80,9 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          password: ${{ secrets.EC2_PASSWORD }}
+          password: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            sudo groupadd docker
-            sudo usermod -aG docker $USER
-            newgrp docker
             pwd
             docker stop nanal
             docker rm nanal
