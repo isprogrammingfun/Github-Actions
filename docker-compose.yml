@@ -23,7 +23,7 @@ services:
     restart: always
   spring-boot:
     container_name: test-server
-    build: test
+    build: .
     restart: always
     ports:
       - "8081:8080"
