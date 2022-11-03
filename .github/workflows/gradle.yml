@@ -84,8 +84,7 @@ jobs:
           envs: GITHUB_SHA
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker stop nanal
-            docker rm nanal
-            sudo docker pull ${{ secrets.DOCKER_HUB_ID }}/nanal
-            docker run -d --name nanal -p 8080:8080 ${{ secrets.DOCKER_HUB_ID }}/nanal
-            docker rmi -f $(docker images -f "dangling=true" -q)
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker-compose up -d
+            docker image prune -f
