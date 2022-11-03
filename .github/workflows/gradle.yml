@@ -84,7 +84,7 @@ jobs:
           envs: GITHUB_SHA
           script: |
             sudo groupadd docker
-            sudo usermod -aG docker ${{ secrets.EC2_USERNAME }}
+            sudo usermod -aG docker $USER
             newgrp docker
             pwd
             docker stop nanal
