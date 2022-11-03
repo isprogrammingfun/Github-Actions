@@ -87,5 +87,5 @@ jobs:
             docker stop nanal
             docker rm nanal
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
-            docker run -d --name nanal -p 8080:8080 wisjang1/pickrap
+            docker run -d --name nanal -p 8080:8080 wisjang1/nanal
             docker rmi -f $(docker images -f "dangling=true" -q)
