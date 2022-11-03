@@ -83,7 +83,7 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           envs: GITHUB_SHA
           script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            pwd
             docker stop nanal
             docker rm nanal
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
