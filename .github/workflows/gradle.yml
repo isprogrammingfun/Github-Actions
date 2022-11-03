@@ -83,6 +83,9 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           envs: GITHUB_SHA
           script: |
+            sudo service docker stop 
+            sudo rm /var/lib/docker/network/files/local-kv.db 
+            sudo service docker start
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker stop nanal
             docker rm nanal
