@@ -83,6 +83,9 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           envs: GITHUB_SHA
           script: |
+            sudo groupadd docker
+            sudo usermod -aG docker ${{ secrets.EC2_USERNAME }}
+            newgrp docker
             pwd
             docker stop nanal
             docker rm nanal
