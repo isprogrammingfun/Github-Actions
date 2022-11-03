@@ -69,8 +69,9 @@ jobs:
         if: contains(github.ref, 'main')
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker tag nanal ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:nanal
           docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/nanal .
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}/nanal
+          docker push ${{ secrets.DOCKER_REPO }}:nanal
       #배포
       - name: Deploy
         uses: appleboy/ssh-action@master
