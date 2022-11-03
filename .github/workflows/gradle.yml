@@ -70,8 +70,8 @@ jobs:
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -f Dockerfile -t nanal .
-          docker tag nanal ${{ secrets.DOCKER_REPO }}/nanal
-          docker push ${{ secrets.DOCKER_REPO }}:nanal
+          docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal .
+          docker push ${{ secrets.DOCKER_USERNAME }}/nanal
       #배포
       - name: Deploy
         uses: appleboy/ssh-action@master
@@ -83,7 +83,9 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal:latest
-            docker tag app ${{ secrets.DOCKER_USERNAME }}/nanal:latest
-            docker stop server
-            docker compose-up -d
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker stop nanal
+            docker rm nanal
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker run -d --name nanal -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker rmi -f $(docker images -f "dangling=true" -q)
