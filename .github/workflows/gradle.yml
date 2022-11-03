@@ -84,7 +84,7 @@ jobs:
           envs: GITHUB_SHA
           script: |
             pwd
-            sudo chmod 666 /var/run/docker.sock
+            sudo usermod -a -G docker $USER
             docker stop nanal
             docker rm nanal
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
