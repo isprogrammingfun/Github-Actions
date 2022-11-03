@@ -83,11 +83,6 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            sudo service docker stop 
-            sudo rm -rf /var/run/docker
-            sudo rm /var/run/docker.*
-            sudo service docker restart
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker stop nanal
             docker rm nanal
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
