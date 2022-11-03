@@ -80,10 +80,12 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          password: ${{ secrets.EC2_PASSWORD }}
-          port: 22
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
+            pwd
+            docker stop nanal
+            docker rm nanal
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
-            docker-compose up -d
-            docker image prune -f
+            docker run -d --name nanal -p 8080:8080 wisjang1/nanal
+            docker rmi -f $(docker images -f "dangling=true" -q)
