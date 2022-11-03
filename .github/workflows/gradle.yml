@@ -81,6 +81,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
+          key: ${{ secrets.PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
