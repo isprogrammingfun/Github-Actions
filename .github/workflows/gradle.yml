@@ -80,7 +80,7 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          password: ${{ secrets.EC2_password }}
+          password: ${{ secrets.EC2_PASSWORD }}
           envs: GITHUB_SHA
           script: |
             sudo chmod 777 /var/run/docker.sock
