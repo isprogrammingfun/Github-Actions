@@ -82,9 +82,7 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker stop nanal
-            docker rm nanal
-            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
-            docker run -d --name nanal -p 8080:8080 {{ secrets.DOCKER_USERNAME }}/nanal
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
             docker-compose up -d
             docker image prune -f
