@@ -84,7 +84,6 @@ jobs:
           envs: GITHUB_SHA
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            sudo docker rm -f $(docker ps -qa)
             docker pull ${{ secrets.DOCKER_USERNAME }}/nanal:latest
             docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal:latest
             docker-compose up -d
