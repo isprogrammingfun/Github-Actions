@@ -86,5 +86,5 @@ jobs:
             docker rm nanal
             docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
             docker run -d --name nanal -p 8080:8080 {{ secrets.DOCKER_USERNAME }}/nanal
-            docker rmi -f $(docker images -f "dangling=true" -q)
-            docker compose-up -d
+            docker-compose up -d
+            docker image prune -f
