@@ -83,7 +83,7 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal:latest
-            docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal
             docker stop server
             docker compose-up -d
