@@ -83,8 +83,9 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            sudo docker rm -f $(docker ps -qa)
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker pull ${{ secrets.DOCKER_REPO }}/nanal
-            docker-compose up -d
-            docker image prune -f
+            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker stop server
+            docker network create -d bridge test
+            docker run -d redis
+            docker run -d --rm --name nanal --network test -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/nanal
