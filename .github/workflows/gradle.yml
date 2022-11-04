@@ -69,7 +69,8 @@ jobs:
         if: contains(github.ref, 'main')
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/nanal .
+          docker build -f Dockerfile -t nanal .
+          docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal
           docker push ${{ secrets.DOCKER_USERNAME }}/nanal
       #배포
       - name: Deploy
@@ -83,7 +84,7 @@ jobs:
           envs: GITHUB_SHA
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
-            docker-compose up -d
-            docker image prune -f
+            docker pull ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker tag nanal ${{ secrets.DOCKER_USERNAME }}/nanal
+            docker stop server
+            docker compose-up -d
