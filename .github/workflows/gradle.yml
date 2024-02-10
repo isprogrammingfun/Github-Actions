@@ -64,10 +64,10 @@ jobs:
         shell: bash
         
       ##CD
-      #빌드(테스트 스킵)
+      #빌드
       - name: Build With Gradle
         if: contains(github.ref, 'main')
-        run: ./gradlew build -x test
+        run: ./gradlew build 
 
       #도커 빌드
       - name: Docker build
