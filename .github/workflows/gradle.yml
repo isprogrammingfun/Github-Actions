@@ -99,5 +99,5 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
             docker stop ${{ secrets.DOCKER_REPOSITORY }}
             docker rm -f ${{ secrets.DOCKER_REPOSITORY }}
-            docker-compose up -d
+            docker compose up -d
             docker image prune -f
