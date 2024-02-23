@@ -1,4 +1,4 @@
-name: CD-dev
+name: CD
 
 on:
   push:
@@ -31,9 +31,9 @@ jobs:
       - name: Set .env for configuration
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.EC2_HOST }}
           username: ubuntu
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.EC2_KEY }}
           script: |
             rm -rf ./.env
             touch ./.env
